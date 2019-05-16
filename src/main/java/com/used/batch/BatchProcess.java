@@ -26,6 +26,7 @@ public class BatchProcess<T> {
 	private int batchSize = 10;
 	private IBatchProcess<T> batchProcess;
 
+	/*
 	public void setBatchTask(IBatchProcess<T> batchProcess) {
 		this.session = ApplicationSessionHolder.getApplicationSession();
 		this.batchProcess = batchProcess;
@@ -42,21 +43,13 @@ public class BatchProcess<T> {
 			this.batchSize = batchSize;			
 		}
 	}
-	
-	/**
-	 * ���̲߳�ͳһ�����ύ�������߳������ύ�ɹ��������߳������ύʧ��; 
-	 * һ���ֳɴ������ֱ��commit;����Ҫ�ȴ������̴߳���
-	 */
+
 	public BatchResult processInconsistency(Map<Object, List<T>> map) {
 		GroupSpliter<T> utils = new GroupSpliter<T>();
 		Map<Integer, List<T>> batchMap = utils.splitByGroupSize(map, batchSize);
 		return process(batchMap, null);
 	}
-	
-	/**
-	 * ���߳�ͳһ�����ύ ����߳�����ͳһ�ύ�ɹ�����ͳһ�ύʧ��
-	 * һ���̴߳������ᱻ�ػ���Holdס,�����̴߳�������ػ����ͷ��߳�ʵ��ͳһcommit;
-	 */
+
 	public BatchResult processConsistency(Map<Object, List<T>> map) {
 		GroupSpliter<T> utils = new GroupSpliter<T>();
 		Map<Integer, List<T>> batchMap = utils.splitByGroupNum(map, threadNum);
@@ -64,20 +57,14 @@ public class BatchProcess<T> {
 		return process(batchMap, guarded);
 	}
 	
-	/**
-	 * ���̲߳�ͳһ�����ύ�������߳������ύ�ɹ��������߳������ύʧ��; 
-	 * һ���ֳɴ������ֱ��commit;����Ҫ�ȴ������̴߳���
-	 */
+
 	public BatchResult processInconsistency(List<T> list) {
 		GroupSpliter<T> utils = new GroupSpliter<T>();
 		Map<Integer, List<T>> batchMap = utils.splitByGroupSize(list, batchSize);
 		return process(batchMap, null);
 	}
-	
-	/**
-	 * ���߳�ͳһ�����ύ ����߳�����ͳһ�ύ�ɹ�����ͳһ�ύʧ��
-	 * һ���̴߳������ᱻ�ػ���Holdס,�����̴߳�������ػ����ͷ��߳�ʵ��ͳһcommit;
-	 */
+
+
 	public BatchResult processConsistency(List<T> list) {
 		GroupSpliter<T> utils = new GroupSpliter<T>();
 		Map<Integer, List<T>> batchMap = utils.splitByGroupNum(list, threadNum);
@@ -140,7 +127,6 @@ public class BatchProcess<T> {
 			throws InterruptedException, ExecutionException, TimeoutException {
 		List<BatchResult<Object, T>> resultList = new ArrayList<BatchResult<Object, T>>();
 		for (Future<BatchResult<Object, T>> future : futures) {
-			// ��㴦���쳣
 			resultList.add(future.get(30, TimeUnit.MINUTES));
 		}
 		
@@ -157,4 +143,6 @@ public class BatchProcess<T> {
 		return resultMerged;
 	}
 
+
+	*/
 }

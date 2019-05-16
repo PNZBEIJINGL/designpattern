@@ -127,7 +127,7 @@ public abstract class AbstractBatchAcceptTask<T> implements IBatchProcess<T> {
 				logger.info("batch MsrRuntimeException.case:" + ex);
 				FailResult<T> failResult = new FailResult<T>(temp);
 				failResult.setException(ex);
-				failResult.setExceptionMsg(ex.getMessage());
+				//failResult.setExceptionMsg(ex.getMessage());
 				result.addFailResult(failResult);
 			}
 		}
