@@ -5,5 +5,14 @@ package com.headfirst.command;
  */
 public interface ICommand {
 
+    /**
+     * 执行
+     */
     public void execute();
+
+    /**
+     * 撤销
+     */
+    public void undo();
+
 }
