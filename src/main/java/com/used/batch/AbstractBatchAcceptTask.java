@@ -3,14 +3,13 @@ package com.used.batch;
 
 import com.star.common.exception.MsrRuntimeException;
 import com.star.sms.business.core.ApplicationSessionHolder;
-import com.star.sms.business.core.BeanFactoryHolder;
 import com.star.sms.model.core.ApplicationSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
+//import org.springframework.transaction.TransactionDefinition;
+//import org.springframework.transaction.TransactionStatus;
+//import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -50,25 +49,26 @@ public abstract class AbstractBatchAcceptTask<T> implements IBatchProcess<T> {
 	private BatchResult<Object, T> processOnebyOne(List<T> datas) {
 		BatchResult<Object, T> result = new BatchResult<Object, T>();
 		for (T data : datas) {
-			PlatformTransactionManager transactionManager = getTransactionManager();
-			DefaultTransactionDefinition defination = new DefaultTransactionDefinition();
-			defination.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
-			TransactionStatus status = transactionManager.getTransaction(defination);
+			//PlatformTransactionManager transactionManager = getTransactionManager();
+			//DefaultTransactionDefinition defination = new DefaultTransactionDefinition();
+			//defination.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+			//TransactionStatus status = transactionManager.getTransaction(defination);
 			Object successResult = null;
 			FailResult<T> failResult = null;
 			try {
 				successResult = call(data);
 			} catch (Exception ex) {
-				pringlog(ex);
+				//pringlog(ex);
 				failResult = new FailResult<T>(data);
 				failResult.setException(ex);
 				failResult.setExceptionMsg(ex.getMessage());
 			} finally {
+
 				if (failResult != null) {
-					transactionManager.rollback(status);
+					//transactionManager.rollback(status);
 					result.addFailResult(failResult);
 				} else {
-					transactionManager.commit(status);
+					//transactionManager.commit(status);
 					result.addSucessObj(successResult);
 				}
 			}
@@ -77,6 +77,7 @@ public abstract class AbstractBatchAcceptTask<T> implements IBatchProcess<T> {
 		return result;
 	}
 
+	/*
 	private void pringlog(Throwable ex) {
 		if ((ex instanceof MsrRuntimeException)) {
 			logger.debug(Thread.currentThread().getName() + " " + ex);
@@ -84,12 +85,13 @@ public abstract class AbstractBatchAcceptTask<T> implements IBatchProcess<T> {
 			logger.error(Thread.currentThread().getName() + " ", ex);
 		}
 	}
+	*/
 
 	private BatchResult<Object, T> processByGuarded(List<T> datas) {
-		PlatformTransactionManager transactionManager = getTransactionManager();
-		DefaultTransactionDefinition defination = new DefaultTransactionDefinition();
-		defination.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
-		TransactionStatus status = transactionManager.getTransaction(defination);
+		//PlatformTransactionManager transactionManager = getTransactionManager();
+		//DefaultTransactionDefinition defination = new DefaultTransactionDefinition();
+		//defination.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+		//TransactionStatus status = transactionManager.getTransaction(defination);
 		BatchResult<Object, T> result = new BatchResult<Object, T>();
 		try {
 			result = processByCall(datas);
@@ -101,15 +103,15 @@ public abstract class AbstractBatchAcceptTask<T> implements IBatchProcess<T> {
 				transactionGuarded.setFailed();
 			}
 		} catch (Throwable ex) {
-			pringlog(ex);
+			//pringlog(ex);
 			result.setSucess(false);
 			transactionGuarded.setFailed();
 			throw new RuntimeException(ex);
 		} finally {
 			if (transactionGuarded.isSuccess()) {
-				transactionManager.commit(status);
+				//transactionManager.commit(status);
 			} else {
-				transactionManager.rollback(status);
+				//transactionManager.rollback(status);
 			}
 		}
 		return result;
