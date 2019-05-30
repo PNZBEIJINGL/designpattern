@@ -9,6 +9,7 @@ public class Specification4Not<T> extends CompositeSpecification<T> {
     }
 
     public boolean isSatisfiedBy(T candidate) {
+
         return !specification.isSatisfiedBy(candidate);
     }
 
