@@ -19,4 +19,9 @@ public class Product {
     public void setCode(String code) {
         this.code = code;
     }
+
+    public String toString() {
+        return name + " |  " + code;
+    }
+
 }

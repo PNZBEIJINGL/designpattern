@@ -8,5 +8,5 @@ public interface IProductRespository {
 
     Product getByName(String name);
 
-    List<Product> GetNewProducts();
+    List<Product> getNewProducts();
 }
