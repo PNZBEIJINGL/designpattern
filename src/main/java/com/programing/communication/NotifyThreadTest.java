@@ -1,5 +1,8 @@
 package com.programing.communication;
 
+/**
+ * notify 和 notifyAll
+ */
 public class NotifyThreadTest extends Thread {
     private Object lock;
 
