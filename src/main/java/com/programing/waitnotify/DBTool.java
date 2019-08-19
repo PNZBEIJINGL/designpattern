@@ -1,0 +1,36 @@
+package com.programing.waitnotify;
+
+public class DBTool {
+
+    volatile private boolean prevIsA=false;
+
+    synchronized  public void backUpA(){
+          while (prevIsA==true) {
+              try {
+                  wait();
+              } catch (InterruptedException e) {
+                  e.printStackTrace();
+              }
+          }
+          for (int i=0;i<5;i++){
+              System.out.println("backup A:********");
+          }
+          prevIsA=true;
+          notifyAll();
+    }
+
+    synchronized public void backUpB(){
+        while (prevIsA==false){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        for (int i=0;i<5;i++){
+            System.out.println("backup B:********");
+        }
+        prevIsA=false;
+        notifyAll();
+    }
+}
