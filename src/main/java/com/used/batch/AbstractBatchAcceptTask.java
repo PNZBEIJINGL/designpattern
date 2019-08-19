@@ -4,15 +4,14 @@ package com.used.batch;
 import com.star.common.exception.MsrRuntimeException;
 import com.star.sms.business.core.ApplicationSessionHolder;
 import com.star.sms.model.core.ApplicationSession;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.PlatformTransactionManager;
-//import org.springframework.transaction.TransactionDefinition;
-//import org.springframework.transaction.TransactionStatus;
-//import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+
+//import org.springframework.transaction.TransactionDefinition;
+//import org.springframework.transaction.TransactionStatus;
+//import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 /**
  * @author LIUY
@@ -21,7 +20,7 @@ import java.util.List;
 public abstract class AbstractBatchAcceptTask<T> implements IBatchProcess<T> {
 
 
-	private final Log logger = LogFactory.getLog(getClass());
+	//private final Log logger = LogFactory.getLog(getClass());
 
 	private TransactionGuarded transactionGuarded;
 
@@ -31,7 +30,7 @@ public abstract class AbstractBatchAcceptTask<T> implements IBatchProcess<T> {
 	}
 
 	public BatchResult<Object, T> call(List<T> datas) {
-		logger.info(Thread.currentThread().getName() + " start|size="+ datas.size());
+		//logger.info(Thread.currentThread().getName() + " start|size="+ datas.size());
 		long startTime = System.currentTimeMillis();
 
 		BatchResult<Object, T> object = null;
@@ -42,7 +41,7 @@ public abstract class AbstractBatchAcceptTask<T> implements IBatchProcess<T> {
 		}
 
 		long processTime = System.currentTimeMillis() - startTime;
-		logger.info(Thread.currentThread().getName() + " end|time="+ (processTime/1000.00)+" s");
+		//logger.info(Thread.currentThread().getName() + " end|time="+ (processTime/1000.00)+" s");
 		return object;
 	}
 
@@ -126,7 +125,7 @@ public abstract class AbstractBatchAcceptTask<T> implements IBatchProcess<T> {
 				Object object = call(data);
 				result.addSucessObj(object);
 			} catch (MsrRuntimeException ex) {
-				logger.info("batch MsrRuntimeException.case:" + ex);
+				//logger.info("batch MsrRuntimeException.case:" + ex);
 				FailResult<T> failResult = new FailResult<T>(temp);
 				failResult.setException(ex);
 				//failResult.setExceptionMsg(ex.getMessage());

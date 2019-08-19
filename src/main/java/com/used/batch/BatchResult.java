@@ -29,7 +29,7 @@ public class BatchResult<T,V> implements Serializable {
 	 */
 	private static final long serialVersionUID = -1596454648943134282L;
 	
-	private boolean isSucess; //���������Ƿ�ɹ�,���ɹ�����true
+	private boolean isSucess;
 	
 	private List<T> sucessList = new ArrayList<T>();
 	

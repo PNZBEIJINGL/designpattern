@@ -1,26 +1,10 @@
 package com.used.batch;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.star.common.exception.MsrRuntimeException;
-import com.star.sms.business.core.ApplicationSessionHolder;
 import com.star.sms.model.core.ApplicationSession;
 
 public class BatchProcess<T> {
 
-	private final Log logger = LogFactory.getLog(getClass());
+	//private final Log logger = LogFactory.getLog(getClass());
 	private ApplicationSession session;
 	private int threadNum = Runtime.getRuntime().availableProcessors();
 	private int batchSize = 10;
