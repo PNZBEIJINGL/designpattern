@@ -71,3 +71,4 @@ Running 状态变成Runnable状态
 
 join() 的作用是等待线程对象销毁
 join 和 synchronized 的区别是join 在内部使用, synchronized 关键字使用的是对象监视器原理同步
+joint(long) 设置等待时间
