@@ -68,3 +68,7 @@ notifyAll()方法可以使所有正在等待队列中等待同一共享资源的
 。如果线程抢占到CPU资源，这个线程就处于Running状态
 2）Runnable状态和Running状态可相互切换，因为有可能线程运行一段时间后，有其他高优先级线程抢占CPU资源，这时此线程就从
 Running 状态变成Runnable状态
+
+join() 的作用是等待线程对象销毁
+join 和 synchronized 的区别是join 在内部使用, synchronized 关键字使用的是对象监视器原理同步
+joint(long) 设置等待时间

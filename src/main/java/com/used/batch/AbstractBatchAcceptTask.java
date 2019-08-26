@@ -4,8 +4,6 @@ package com.used.batch;
 import com.star.common.exception.MsrRuntimeException;
 import com.star.sms.business.core.ApplicationSessionHolder;
 import com.star.sms.model.core.ApplicationSession;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -72,7 +70,7 @@ public abstract class AbstractBatchAcceptTask<T> implements IBatchProcess<T> {
 				}
 			}
 		}
-		result.setSucess(CollectionUtils.isEmpty(result.getFailList()) ? true: false);
+		result.setSucess(result.getFailList().size()==0 ? true: false);
 		return result;
 	}
 
@@ -94,7 +92,7 @@ public abstract class AbstractBatchAcceptTask<T> implements IBatchProcess<T> {
 		BatchResult<Object, T> result = new BatchResult<Object, T>();
 		try {
 			result = processByCall(datas);
-			if (CollectionUtils.isEmpty(result.getFailList())) {
+			if (result.getFailList().size()==0) {
 				result.setSucess(true);
 				transactionGuarded.hold(Thread.currentThread().getName());
 			} else {
@@ -146,10 +144,10 @@ public abstract class AbstractBatchAcceptTask<T> implements IBatchProcess<T> {
 	public abstract Object call(T data);
 	
 	
-	private PlatformTransactionManager getTransactionManager() {
-		return  null;
+	//private PlatformTransactionManager getTransactionManager() {
+		//return  null;
 		//return (PlatformTransactionManager) BeanFactoryHolder.getContext().getBean("transactionManager");
-	}
+	//}
 	
 
 	public void setSession(ApplicationSession session) {
