@@ -72,3 +72,8 @@ Running 状态变成Runnable状态
 join() 的作用是等待线程对象销毁
 join 和 synchronized 的区别是join 在内部使用, synchronized 关键字使用的是对象监视器原理同步
 joint(long) 设置等待时间
+
+
+Lock.
+lock.lock()就有了对象监听器，其他线程就需要等待，锁被释放的时候再被争夺，就和　synchronized关键字一样
+线程间执行的顺序是随机的
