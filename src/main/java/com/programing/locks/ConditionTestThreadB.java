@@ -1,16 +1,16 @@
 package com.programing.locks;
 
-public class ConditionTestThread extends Thread {
+public class ConditionTestThreadB extends Thread {
 
     private ConditionTestService testService;
 
-    public ConditionTestThread(ConditionTestService testService) {
+    public ConditionTestThreadB(ConditionTestService testService) {
         this.testService = testService;
     }
 
     public void run() {
 
-        testService.await();
+        testService.await2();
     }
 
 }

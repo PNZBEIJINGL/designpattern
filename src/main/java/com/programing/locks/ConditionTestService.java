@@ -30,4 +30,27 @@ public class ConditionTestService {
         lock.unlock();
     }
 
+    public void await2() {
+        try {
+            lock.lock();
+            System.out.println(Thread.currentThread().getName() + " before awaitb" + System.currentTimeMillis());
+            condition.await();
+            System.out.println(Thread.currentThread().getName() + " after awaitb" + System.currentTimeMillis());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+
+    public void signalAll() {
+        lock.lock();
+        System.out.println(Thread.currentThread().getName() + " before signal all" + System.currentTimeMillis());
+        condition.signalAll();
+        System.out.println(Thread.currentThread().getName() + " after signal all" + System.currentTimeMillis());
+        lock.unlock();
+    }
+
+
 }
