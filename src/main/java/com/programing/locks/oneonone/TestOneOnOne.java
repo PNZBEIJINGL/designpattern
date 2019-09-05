@@ -7,6 +7,6 @@ public class TestOneOnOne {
         Thread4Set thread4Set = new Thread4Set(printer);
         Thread4Get thread4Get = new Thread4Get(printer);
         thread4Set.start();
-        thread4Set.start();
+        thread4Get.start();
     }
 }
