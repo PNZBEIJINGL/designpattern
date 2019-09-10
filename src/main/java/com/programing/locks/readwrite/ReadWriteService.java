@@ -9,7 +9,7 @@ public class ReadWriteService {
     public void read() {
         try {
             readWriteLock.readLock().lock();
-            System.out.println("Get read lock " + Thread.currentThread().getName() + " " + System.currentTimeMillis());
+            System.out.println("Get  read lock " + Thread.currentThread().getName() + " " + System.currentTimeMillis());
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
