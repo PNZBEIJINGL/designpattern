@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Timer;
 
 public class TestCancel {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         System.out.println("晚于当前时间测试：当前时间" + new Date());
         Calendar calendar = Calendar.getInstance();
@@ -18,5 +18,8 @@ public class TestCancel {
         Timer timer = new Timer();
         timer.schedule(task, runDT, 3000);
         timer.schedule(taskb, runDT, 3000);
+
+        Thread.sleep(10000);
+        timer.cancel();
     }
 }
