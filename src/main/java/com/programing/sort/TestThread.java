@@ -17,6 +17,7 @@ public class TestThread extends Thread {
 
     @Override
     public void run() {
+        // 线程运行时多个线程之间执行任务的时机是无序的。可以通过改造代码的方式使他们运行具有有序性
         try {
             synchronized (lock) {
                 while (true) {
