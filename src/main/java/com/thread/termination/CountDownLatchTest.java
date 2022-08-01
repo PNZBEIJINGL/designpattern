@@ -20,6 +20,7 @@ public class CountDownLatchTest {
 
         try {
             doneLatch.await();
+            System.out.println("continue："+doneLatch.getCount());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally{

@@ -12,11 +12,11 @@ public class MyTask implements Runnable{
     public MyTask(CountDownLatch downLatch,int i){
         this.doneLatch=downLatch;
         this.count =i;
-
     }
 
     public void run() {
         doTask();
+        //任务完成计数-1
         doneLatch.countDown();
     }
 
